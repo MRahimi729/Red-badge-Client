@@ -23,7 +23,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
       {"Copyright © "}
-      <Link color="inherit">For the Coilture</Link> {new Date().getFullYear()}
+      {/* <Link color="inherit">For the Coilture</Link> {new Date().getFullYear()} */}
       {"."}
     </Typography>
   );
@@ -33,56 +33,43 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const theme = createTheme();
 
-export default function Home() {
+export default function Home(props) {
   return (
-    <Route>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <AppBar position="relative">
-          <Toolbar>
-            <Button color="inherit">Home</Button>
-            <Link to="/mytutorials"> My Stuff </Link>
-            <Link to="/about"> About </Link>
-          </Toolbar>
-        </AppBar>
-        <main>
-          {/* Hero unit */}
-          <Box
-            sx={{
-              bgcolor: "background.paper",
-              pt: 8,
-              pb: 6,
-            }}
-          >
-            <Container maxWidth="md" justifyContent="center">
-              <Switch>
-                <Route path="/about">
-                  <About />
-                </Route>
-                <Route path="/mytutorials">
-                  <MyTutorials />
-                </Route>
-              </Switch>
-            </Container>
-          </Box>
-        </main>
-        {/* Footer */}
-        <Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">
-          <Typography variant="h6" align="center" gutterBottom>
-            Footer
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            align="center"
-            color="text.secondary"
-            component="p"
-          >
-            Something here to give the footer a purpose!
-          </Typography>
-          <Copyright />
-        </Box>
-        {/* End footer */}
-      </ThemeProvider>
-    </Route>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <AppBar position="relative">
+        <Toolbar>
+          <Button color="inherit">Home</Button>
+          <Link to="/mytutorials"> My Stuff </Link>
+          <Link to="/about"> About </Link>
+        </Toolbar>
+      </AppBar>
+      <main>
+        {/* Hero unit */}
+        <Box
+          sx={{
+            bgcolor: "background.paper",
+            pt: 8,
+            pb: 6,
+          }}
+        ></Box>
+      </main>
+      {/* Footer */}
+      <Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">
+        <Typography variant="h6" align="center" gutterBottom>
+          Footer
+        </Typography>
+        <Typography
+          variant="subtitle1"
+          align="center"
+          color="text.secondary"
+          component="p"
+        >
+          Something here to give the footer a purpose!
+        </Typography>
+        <Copyright />
+      </Box>
+      {/* End footer */}
+    </ThemeProvider>
   );
 }

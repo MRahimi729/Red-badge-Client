@@ -5,7 +5,12 @@ import React from "react";
 import Auth from "./components/Auth/Auth";
 import HomePage from "./components/HomePage";
 // import AdminPage from "./components/AdminPage";
-import { Switch, BrowserRouter as Router } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
+import Container from "@mui/material/Container";
+import About from "./components/About";
+import MyTutorials from "./components/MyTutorials";
+import SignIn from "./components/Auth/SignIn";
+import SignUp from "./components/Auth/SignUp";
 
 import "./App.css";
 
@@ -20,25 +25,44 @@ export default class App extends React.Component {
     };
   }
 
+  componentDidMount() {
+    if (this.state.sessionToken === localStorage.getItem("sessionToken")) {
+      this.setState({ sessionToken: localStorage.getItem("sessionToken") });
+    }
+  }
+
   updateToken = (newToken) => {
     localStorage.setItem("sessionToken", newToken);
     this.setState({
       sessionToken: newToken,
     });
   };
+
   render() {
     return (
       // (<SignUp updateToken={updateToken} />),
       // (<SignIn updateToken={updateToken} />)
-      <Router>
+      <Container maxWidth="md" justifyContent="center">
         <Switch>
-          {this.state.sessionToken === localStorage.getItem("sessionToken") ? (
-            <HomePage />
-          ) : (
-            <Auth updateToken={this.updateToken} />
-          )}
+          <Route exact path="/">
+            {this.state.sessionToken ===
+            localStorage.getItem("sessionToken") ? (
+              <HomePage sessionToken={this.state.sessionToken} />
+            ) : (
+              <SignIn updateToken={this.updateToken} />
+            )}
+          </Route>
+          <Route exact path="/signup">
+            <SignUp updateToken={this.updateToken} />
+          </Route>
+          <Route exact path="/about">
+            <About />
+          </Route>
+          <Route exact path="/mytutorials">
+            <MyTutorials sessionToken={this.state.sessionToken} />
+          </Route>
         </Switch>
-      </Router>
+      </Container>
     );
   }
 }
