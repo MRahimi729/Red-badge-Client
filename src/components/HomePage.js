@@ -17,19 +17,18 @@ import Container from "@mui/material/Container";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import About from "./About";
-import MyTutorials from "./MyTutorials";
+// import MyTutorials from "./Tutorials/MyTutorials";
+import TutorialIndex from "./Tutorials/TutorialIndex";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
       {"Copyright © "}
-      {/* <Link color="inherit">For the Coilture</Link> {new Date().getFullYear()} */}
+      For the Coilture {new Date().getFullYear()}
       {"."}
     </Typography>
   );
 }
-
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const theme = createTheme();
 
@@ -52,7 +51,9 @@ export default function Home(props) {
             pt: 8,
             pb: 6,
           }}
-        ></Box>
+        >
+          <TutorialIndex sessionToken={props.sessionToken} />
+        </Box>
       </main>
       {/* Footer */}
       <Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">

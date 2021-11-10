@@ -8,9 +8,10 @@ import HomePage from "./components/HomePage";
 import { Switch, Route } from "react-router-dom";
 import Container from "@mui/material/Container";
 import About from "./components/About";
-import MyTutorials from "./components/MyTutorials";
+import MyTutorials from "./components/Tutorials/MyTutorials";
 import SignIn from "./components/Auth/SignIn";
 import SignUp from "./components/Auth/SignUp";
+import TutorialIndex from "./components/Tutorials/TutorialIndex";
 
 import "./App.css";
 
@@ -55,6 +56,8 @@ export default class App extends React.Component {
           <Route exact path="/signup">
             <SignUp updateToken={this.updateToken} />
           </Route>
+          {/* <Auth updateToken={this.updateToken} />
+        )} */}
           <Route exact path="/about">
             <About />
           </Route>
@@ -62,6 +65,13 @@ export default class App extends React.Component {
             <MyTutorials sessionToken={this.state.sessionToken} />
           </Route>
         </Switch>
+        {/* <Route exact path="/about">
+            <About />
+          </Route>
+          <Route exact path="/mytutorials">
+            <MyTutorials sessionToken={this.state.sessionToken} />
+          </Route>
+        </Switch> */}
       </Container>
     );
   }

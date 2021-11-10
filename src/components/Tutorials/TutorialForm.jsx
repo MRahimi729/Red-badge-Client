@@ -25,23 +25,6 @@ export default class TutorialForm extends React.Component {
   }
 
   uploadImage = async (event) => {
-    // let files = event.target.files;
-    // let data = new FormData();
-    // data.append("file", files[0]);
-    // data.append("upload_preset", "Tutorial Images");
-    // this.setState({
-    //   Loading: true,
-    // });
-    // const response = await fetch(
-    //   "https://api.cloudinary.com/v1_1/dmvwjinuq/image/upload",
-    //   {
-    //     method: "POST",
-    //     body: data,
-    //   }
-    // );
-    // const File = await response.json();
-    // console.log(File.secure_url);
-    // this.setState({ photo_url: File.secure_url });
     let files = event.target.files;
     let data = new FormData();
     data.append("file", files[0]);

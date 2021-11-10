@@ -17,8 +17,8 @@ import Container from "@mui/material/Container";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TutorialForm from "./TutorialForm";
-
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+import MyTutorialIndex from "./MyTutorialIndex";
+import TutorialTable from "./TutorialTable";
 
 const theme = createTheme();
 
@@ -33,39 +33,17 @@ export default class MyTutorials extends React.Component {
       estimatedTime: "",
       tools: "",
       directions: "",
+      tutorials: [],
     };
     console.log(this.props.sessionToken);
     this.handleClose = this.handleClose.bind(this);
   }
+
   handleClose = () => {
     console.log("button firing");
     this.setState({ open: false });
   };
-  handleSubmit = (event) => {
-    event.preventDefault();
-    fetch("http://localhost:3000/tutorial/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: this.props.sessionToken,
-      },
-      body: JSON.stringify({
-        tutorial: {
-          title: this.state.title,
-          description: this.state.description,
-          estimatedTime: this.state.estimatedTime,
-          tools: this.state.tools,
-          directions: this.state.directions,
-        },
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({ data: data });
-        console.log(this.props.sessionToken, "this is from line 63");
-      })
-      .catch((error) => console.log(error));
-  };
+
   render() {
     return (
       <div>
@@ -122,44 +100,8 @@ export default class MyTutorials extends React.Component {
                 handleClose={this.handleClose}
               />
             )}
-            <Container sx={{ py: 8 }} maxWidth="md">
-              {/* End hero unit */}
-              <Grid container spacing={4}>
-                {cards.map((card) => (
-                  <Grid item key={card} xs={12} sm={6} md={4}>
-                    <Card
-                      sx={{
-                        height: "100%",
-                        display: "flex",
-                        flexDirection: "column",
-                      }}
-                    >
-                      <CardMedia
-                        component="img"
-                        sx={{
-                          // 16:9
-                          pt: "56.25%",
-                        }}
-                        image="https://source.unsplash.com/random"
-                        alt="random"
-                      />
-                      <CardContent sx={{ flexGrow: 1 }}>
-                        <Typography gutterBottom variant="h5" component="h2">
-                          Heading
-                        </Typography>
-                        <Typography>
-                          This is a media card. You can use this section to
-                          describe the content.
-                        </Typography>
-                      </CardContent>
-                      <CardActions>
-                        <Button size="small">View</Button>
-                        <Button size="small">Edit</Button>
-                      </CardActions>
-                    </Card>
-                  </Grid>
-                ))}
-              </Grid>
+            <Container>
+              <MyTutorialIndex sessionToken={this.props.sessionToken} />
             </Container>
           </main>
         </ThemeProvider>
