@@ -27,9 +27,9 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    if (this.state.sessionToken === localStorage.getItem("sessionToken")) {
-      this.setState({ sessionToken: localStorage.getItem("sessionToken") });
-    }
+    // if (this.state.sessionToken === localStorage.getItem("sessionToken")) {
+    this.setState({ sessionToken: localStorage.getItem("sessionToken") ?? "" });
+    // }
   }
 
   updateToken = (newToken) => {
@@ -62,7 +62,9 @@ export default class App extends React.Component {
             <About />
           </Route>
           <Route exact path="/mytutorials">
-            <MyTutorials sessionToken={this.state.sessionToken} />
+            {!!this.state.sessionToken && (
+              <MyTutorials sessionToken={this.state.sessionToken} />
+            )}
           </Route>
         </Switch>
         {/* <Route exact path="/about">

@@ -34,45 +34,48 @@ export default class TutorialTable extends React.Component {
           <Grid container spacing={4}>
             {this.props.tutorials.length > 0 ? (
               <>
-                {this.props.tutorials?.map((tutorial) => (
-                  <Grid item key={tutorial.id} xs={12} sm={6} md={4}>
-                    <Card
-                      sx={{
-                        height: "100%",
-                        display: "flex",
-                        flexDirection: "column",
-                      }}
-                    >
-                      <CardMedia
-                        component="img"
+                {this.props.tutorials
+                  ?.sort((a, b) => b.id - a.id)
+                  .map((tutorial) => (
+                    <Grid item key={tutorial.id} xs={12} sm={6} md={4}>
+                      <Card
                         sx={{
-                          // 16:9
-                          pt: "56.25%",
+                          height: "100%",
+                          display: "flex",
+                          flexDirection: "column",
                         }}
-                        image={tutorial.photo_url}
-                        alt="random"
-                      />
-                      <CardContent sx={{ flexGrow: 1 }}>
-                        <Typography gutterBottom variant="h5" component="h2">
-                          {tutorial.title}
-                        </Typography>
-                        <Typography>{tutorial.description}</Typography>
-                      </CardContent>
-                      <CardActions>
-                        <Button size="small">View</Button>
-                        <Button
-                          onClick={() => {
-                            this.handleOpen();
-                            this.handleUpdate(tutorial);
+                      >
+                        <CardMedia
+                          component="img"
+                          sx={{
+                            // 16:9
+                            pt: "56.25%",
                           }}
-                          size="small"
-                        >
-                          Edit
-                        </Button>
-                      </CardActions>
-                    </Card>
-                  </Grid>
-                ))}
+                          image={tutorial.photo_url}
+                          alt="random"
+                        />
+                        {new Date(tutorial.createdAt).toLocaleDateString()}
+                        <CardContent sx={{ flexGrow: 1 }}>
+                          <Typography gutterBottom variant="h5" component="h2">
+                            {tutorial.title}
+                          </Typography>
+                          <Typography>{tutorial.description}</Typography>
+                        </CardContent>
+                        <CardActions>
+                          <Button size="small">View</Button>
+                          <Button
+                            onClick={() => {
+                              this.handleOpen();
+                              this.handleUpdate(tutorial);
+                            }}
+                            size="small"
+                          >
+                            Edit
+                          </Button>
+                        </CardActions>
+                      </Card>
+                    </Grid>
+                  ))}
               </>
             ) : (
               <></>

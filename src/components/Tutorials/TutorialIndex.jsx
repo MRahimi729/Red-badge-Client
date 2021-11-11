@@ -32,7 +32,10 @@ export default class TutorialIndex extends React.Component {
     // console.log(this.state.tutorials);
     return (
       <div>
-        <TutorialTable tutorials={this.state.tutorials} />
+        <TutorialTable
+          tutorials={this.state.tutorials}
+          sessionToken={this.props.sessionToken}
+        />
       </div>
     );
   }

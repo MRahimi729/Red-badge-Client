@@ -13,7 +13,7 @@ export default class MyTutorialIndex extends React.Component {
   componentDidMount() {
     this.userTutorials();
   }
-  userTutorials = (tutorial) => {
+  userTutorials = () => {
     fetch("http://localhost:3000/tutorial/user", {
       method: "GET",
       headers: new Headers({
@@ -32,7 +32,10 @@ export default class MyTutorialIndex extends React.Component {
     console.log(this.state.tutorials);
     return (
       <div>
-        <TutorialTable tutorials={this.state.tutorials} />
+        <TutorialTable
+          tutorials={this.state.tutorials}
+          sessionToken={this.props.sessionToken}
+        />
       </div>
     );
   }

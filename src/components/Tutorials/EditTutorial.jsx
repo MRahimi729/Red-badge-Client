@@ -67,7 +67,7 @@ export default class EditTutorial extends React.Component {
   handleEdit = (event) => {
     console.log(this.props.sessionToken);
     event.preventDefault();
-    fetch("http://localhost:3000/tutorial//update/:id", {
+    fetch(`http://localhost:3000/tutorial/update/${this.state.id}`, {
       method: "PUT",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -87,7 +87,9 @@ export default class EditTutorial extends React.Component {
       .then((response) => response.json())
       .then((data) => {
         this.setState({ data: data });
-        this.props.handleClose();
+        this.props.handleOpen();
+        // this.props.userTutorials();
+        window.location.reload();
       })
       .catch((error) => console.log(error));
   };
