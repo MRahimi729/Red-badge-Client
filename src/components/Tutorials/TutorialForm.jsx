@@ -44,13 +44,13 @@ export default class TutorialForm extends React.Component {
 
   handleClickOpen = () => {
     this.setState({
-      open: true,
+      open: !this.state.open,
     });
   };
 
   handleClose = () => {
     console.log("button firing");
-    this.setState({ open: false });
+    this.setState({ open: !this.state.open });
   };
 
   handleSubmit = (event) => {
@@ -76,6 +76,7 @@ export default class TutorialForm extends React.Component {
       .then((response) => response.json())
       .then((data) => {
         this.setState({ data: data });
+        this.props.handleClose();
       })
       .catch((error) => console.log(error));
   };

@@ -10,7 +10,7 @@ export default class MyTutorialIndex extends React.Component {
       tutorials: [],
     };
   }
-  componentWillMount() {
+  componentDidMount() {
     this.userTutorials();
   }
   userTutorials = (tutorial) => {
