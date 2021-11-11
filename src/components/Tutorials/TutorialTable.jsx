@@ -7,11 +7,24 @@ import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
+import EditTutorial from "./EditTutorial";
 
 export default class TutorialTable extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      updateActive: false,
+      tutorialToUpdate: {},
+    };
   }
+
+  handleOpen = () => {
+    this.setState({ updateActive: !this.state.updateActive });
+  };
+
+  handleUpdate = (tutorial) => {
+    this.setState({ tutorialToUpdate: tutorial });
+  };
   render() {
     console.log(this.props.tutorials);
     return (
@@ -47,7 +60,15 @@ export default class TutorialTable extends React.Component {
                       </CardContent>
                       <CardActions>
                         <Button size="small">View</Button>
-                        <Button size="small">Edit</Button>
+                        <Button
+                          onClick={() => {
+                            this.handleOpen();
+                            this.handleUpdate(tutorial);
+                          }}
+                          size="small"
+                        >
+                          Edit
+                        </Button>
                       </CardActions>
                     </Card>
                   </Grid>
@@ -58,6 +79,14 @@ export default class TutorialTable extends React.Component {
             )}
           </Grid>
         </Container>
+        {this.state.updateActive && (
+          <EditTutorial
+            open={this.state.updateActive}
+            tutorialToUpdate={this.state.tutorialToUpdate}
+            sessionToken={this.props.sessionToken}
+            handleOpen={this.handleOpen}
+          />
+        )}
       </div>
     );
   }

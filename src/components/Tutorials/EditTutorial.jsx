@@ -13,7 +13,7 @@ export default class EditTutorial extends React.Component {
     super(props);
     this.state = {
       id: "",
-      open: false,
+      open: this.props.open,
       title: "",
       photo_url: "",
       description: "",
@@ -26,13 +26,12 @@ export default class EditTutorial extends React.Component {
 
   componentDidMount() {
     this.setState({
-      id: this.props.tutorial.id,
-      title: this.props.tutorial.title,
-      photo_url: this.props.tutorial.photo_url,
-      description: this.props.tutorial.description,
-      estimatedTime: this.props.tutorial.estimatedTime,
-      tools: this.props.tutorial.tools,
-      directions: this.props.tutorial.directions,
+      id: this.props.tutorialToUpdate.id,
+      title: this.props.tutorialToUpdate.title,
+      photo_url: this.props.tutorialToUpdate.photo_url,
+      description: this.props.tutorialToUpdate.description,
+      estimatedTime: this.props.tutorialToUpdate.estimatedTime,
+      tools: this.props.tutorialToUpdate.tools,
     });
   }
 
@@ -95,10 +94,7 @@ export default class EditTutorial extends React.Component {
   render() {
     return (
       <div>
-        <Dialog
-          open={this.props.open}
-          onClose={(e) => this.setState({ open: false })}
-        >
+        <Dialog open={this.props.open} onClose={(e) => this.props.handleOpen()}>
           <DialogTitle>Update Tutorial</DialogTitle>
           <DialogContent>
             <DialogContentText>
@@ -197,7 +193,7 @@ export default class EditTutorial extends React.Component {
             ></TextField>
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => this.props.handleClose()}>Cancel</Button>
+            <Button onClick={() => this.props.handleOpen()}>Cancel</Button>
             <Button onClick={this.handleEdit}>Update</Button>
           </DialogActions>
         </Dialog>
