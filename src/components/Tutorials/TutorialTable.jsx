@@ -8,15 +8,24 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import EditTutorial from "./EditTutorial";
+// import ViewTutorial from "./ViewTutorial";
 
 export default class TutorialTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: "",
+      view: false,
       updateActive: false,
       tutorialToUpdate: {},
     };
   }
+
+  handleView = () => {
+    this.setState({
+      view: !this.state.view,
+    });
+  };
 
   handleOpen = () => {
     this.setState({ updateActive: !this.state.updateActive });
@@ -24,6 +33,20 @@ export default class TutorialTable extends React.Component {
 
   handleUpdate = (tutorial) => {
     this.setState({ tutorialToUpdate: tutorial });
+  };
+
+  handleDelete = (event) => {
+    if (!window.confirm("Are you sure you want to delete this tutorial?"))
+      return;
+    fetch(`http://localhost:3000/tutorial/delete/${this.state.id}`, {
+      method: "DELETE",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: this.props.sessionToken,
+      }),
+    })
+      .then((response) => response.json())
+      .then(() => this.setState({ status: "Tutorial Successfully Deleted" }));
   };
   render() {
     console.log(this.props.tutorials);
@@ -54,15 +77,31 @@ export default class TutorialTable extends React.Component {
                           image={tutorial.photo_url}
                           alt="random"
                         />
-                        {new Date(tutorial.createdAt).toLocaleDateString()}
+                        <Typography align="center">
+                          {new Date(tutorial.createdAt).toLocaleDateString()}
+                        </Typography>
                         <CardContent sx={{ flexGrow: 1 }}>
-                          <Typography gutterBottom variant="h5" component="h2">
+                          <Typography
+                            align="center"
+                            gutterBottom
+                            variant="h5"
+                            component="h2"
+                          >
                             {tutorial.title}
                           </Typography>
-                          <Typography>{tutorial.description}</Typography>
+                          <Typography align="center">
+                            {tutorial.description}
+                          </Typography>
                         </CardContent>
                         <CardActions>
-                          <Button size="small">View</Button>
+                          <Button
+                            onClick={() => {
+                              this.handleView();
+                            }}
+                            size="small"
+                          >
+                            View
+                          </Button>
                           <Button
                             onClick={() => {
                               this.handleOpen();
@@ -71,6 +110,14 @@ export default class TutorialTable extends React.Component {
                             size="small"
                           >
                             Edit
+                          </Button>
+                          <Button
+                            onClick={() => {
+                              this.handleDelete();
+                            }}
+                            size="small"
+                          >
+                            Delete
                           </Button>
                         </CardActions>
                       </Card>
@@ -90,6 +137,13 @@ export default class TutorialTable extends React.Component {
             handleOpen={this.handleOpen}
           />
         )}
+        {/* {this.state.view && (
+          <ViewTutorial
+            open={this.state.view}
+            sessionToken={this.props.sessionToken}
+            handleView={this.handleView}
+          />
+        )} */}
       </div>
     );
   }

@@ -123,7 +123,7 @@ export default class EditTutorial extends React.Component {
               onChange={this.uploadImage}
               id="upload button"
               name="photo_url"
-              label="Upload Photo"
+              label=""
               type="file"
               fullWidth
               variant="outlined"
