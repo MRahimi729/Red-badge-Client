@@ -32,6 +32,7 @@ export default class EditTutorial extends React.Component {
       description: this.props.tutorialToUpdate.description,
       estimatedTime: this.props.tutorialToUpdate.estimatedTime,
       tools: this.props.tutorialToUpdate.tools,
+      directions: this.props.tutorialToUpdate.directions,
     });
   }
 
@@ -120,7 +121,7 @@ export default class EditTutorial extends React.Component {
               autoFocus
               // value={this.state.photo_url}
               margin="dense"
-              onChange={this.uploadImage}
+              onChange={this.updateImage}
               id="upload button"
               name="photo_url"
               label=""
