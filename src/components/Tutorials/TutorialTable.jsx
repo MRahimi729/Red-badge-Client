@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import EditTutorial from "./EditTutorial";
-// import ViewTutorial from "./ViewTutorial";
+import ViewTutorial from "./ViewTutorial";
 
 export default class TutorialTable extends React.Component {
   constructor(props) {
@@ -18,8 +18,12 @@ export default class TutorialTable extends React.Component {
       view: false,
       updateActive: false,
       tutorialToUpdate: {},
+      tutorialToView: {},
     };
   }
+  handleTutorial = (tutorial) => {
+    this.setState({ tutorialToView: tutorial });
+  };
 
   handleView = () => {
     this.setState({
@@ -35,10 +39,10 @@ export default class TutorialTable extends React.Component {
     this.setState({ tutorialToUpdate: tutorial });
   };
 
-  handleDelete = (event) => {
+  handleDelete = (tutorial) => {
     if (!window.confirm("Are you sure you want to delete this tutorial?"))
       return;
-    fetch(`http://localhost:3000/tutorial/delete/${this.state.id}`, {
+    fetch(`http://localhost:3000/tutorial/delete/${tutorial.id}`, {
       method: "DELETE",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -97,6 +101,7 @@ export default class TutorialTable extends React.Component {
                           <Button
                             onClick={() => {
                               this.handleView();
+                              this.handleTutorial(tutorial);
                             }}
                             size="small"
                           >
@@ -113,7 +118,7 @@ export default class TutorialTable extends React.Component {
                           </Button>
                           <Button
                             onClick={() => {
-                              this.handleDelete();
+                              this.handleDelete(tutorial);
                             }}
                             size="small"
                           >
@@ -137,13 +142,14 @@ export default class TutorialTable extends React.Component {
             handleOpen={this.handleOpen}
           />
         )}
-        {/* {this.state.view && (
+        {this.state.view && (
           <ViewTutorial
             open={this.state.view}
             sessionToken={this.props.sessionToken}
             handleView={this.handleView}
+            tutorial={this.state.tutorialToView}
           />
-        )} */}
+        )}
       </div>
     );
   }
