@@ -6,12 +6,16 @@ import Container from "@mui/material/Container";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import ClearOutlinedIcon from "@mui/icons-material/ClearOutlined";
 import CommentIcon from "@mui/icons-material/Comment";
+import TextField from "@mui/material/TextField";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import Post from "./Post.css";
 
 export default class ViewTutorial extends React.Component {
   constructor(props) {
@@ -22,19 +26,30 @@ export default class ViewTutorial extends React.Component {
       tutorialToView: {},
       fullWidth: true,
       maxWidth: "lg",
+      comment: "",
     };
   }
-
-  //   handleView = () => {
-  //     this.setState({
-  //       open: true,
-  //     });
-  //   };
-  //   handleClose = () => {
-  //     this.setState({
-  //       open: !this.state.open,
-  //     });
-  //   };
+  handlePost = (event) => {
+    console.log(this.props.sessionToken);
+    // event.preventDefault();
+    fetch(`http://localhost:3000/comment/create/${this.tutorial.id}`, {
+      method: "POST",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: this.props.sessionToken,
+      }),
+      body: JSON.stringify({
+        comment: {
+          comment: this.state.comment,
+        },
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({ data: data });
+      })
+      .catch((error) => console.log(error));
+  };
 
   render() {
     console.log(this.props.tutorial);
@@ -64,7 +79,7 @@ export default class ViewTutorial extends React.Component {
                       width: "fit-content",
                     }}
                   >
-                    <img width="300px" src={this.props.tutorial.photo_url} />
+                    <img width="50%" src={this.props.tutorial.photo_url} />
                   </Box>
                   <DialogTitle align="center">
                     {this.props.tutorial.title}
@@ -91,21 +106,48 @@ export default class ViewTutorial extends React.Component {
                     <br />
                     <Typography>Comments:</Typography>
                     <DialogActions>
-                      <Box>
-                        <Typography></Typography>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "column",
+                          m: "auto",
+                          width: "fit-content",
+                        }}
+                      >
+                        <div className="post">
+                          <div className="post_top">
+                            <IconButton className="post_button">
+                              <MoreVertIcon />
+                            </IconButton>
+                            <div className="post_topInfo">
+                              <h3>username</h3>
+                              <p>Timestamp...</p>
+                              <Typography>Comments</Typography>
+                            </div>
+                          </div>
+                        </div>
                       </Box>
-                      <Button>Edit</Button>
-                      <Button>Delete</Button>
                     </DialogActions>
                   </DialogContent>
                   <DialogActions>
-                    {/* <TextAreaAutosize
-            aria-label="empty textarea"
-            minRows={2}
-            placeholder="Post a Comment Here"
-            style={{ width: "90%" }}
-            /> */}
-                    <Button>Post</Button>
+                    <TextField
+                      fullWidth
+                      value={this.state.comment}
+                      autoFocus
+                      margin="dense"
+                      // sx={{ m: 1, width: "60ch" }}
+                      onChange={(e) =>
+                        this.setState({ comment: e.target.value })
+                      }
+                      variant="outlined"
+                      id="comment"
+                      name="comment"
+                      label="Leave a comment"
+                      type="text"
+                      multiline
+                      rows={2}
+                    ></TextField>
+                    <Button onClick={this.handlePost}>Post</Button>
                   </DialogActions>
                 </Dialog>
               </Grid>
