@@ -27,11 +27,13 @@ export default class ViewTutorial extends React.Component {
       fullWidth: true,
       maxWidth: "lg",
       comment: "",
+      tutorialId: 0,
+      comments: [],
     };
   }
   handlePost = (event) => {
     console.log(this.props.sessionToken);
-    // event.preventDefault();
+    event.preventDefault();
     fetch(`http://localhost:3000/comment/create/${this.tutorial.id}`, {
       method: "POST",
       headers: new Headers({
@@ -49,6 +51,41 @@ export default class ViewTutorial extends React.Component {
         this.setState({ data: data });
       })
       .catch((error) => console.log(error));
+  };
+
+  // fetchComments = () => {
+  //   fetch(
+  //     `http://localhost:3000/comment/${tutorial.id}`, {
+
+  //     }
+  // .then((response) => response.json())
+  // .then((jsonData) => {
+  //   console.log(jsonData);
+  //   if (jsonData) {
+  //     this.setState({
+  //       tutorialId: jsonData.id,
+  //       comments: jsonData.comment,
+  //     });
+  //   }
+  // })
+  //   );
+  // };
+
+  fetchComments = () => {
+    fetch("http://localhost:3000/comment/${tutorial.id}", {
+      method: "GET",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: this.props.sessionToken,
+      }),
+    })
+      .then((response) => response.json())
+      .then((jsonData) => {
+        this.setState({
+          comments: jsonData,
+        });
+        // console.log(getData);
+      });
   };
 
   render() {
@@ -105,7 +142,12 @@ export default class ViewTutorial extends React.Component {
                     <Typography>{this.props.tutorial.directions}</Typography>
                     <br />
                     <Typography>Comments:</Typography>
-                    <DialogActions>
+                    <Typography>
+                      {this.props.tutorial.comments.map((comment) => (
+                        <p>{comment.comment}</p>
+                      ))}
+                    </Typography>
+                    {/* <DialogActions>
                       <Box
                         sx={{
                           display: "flex",
@@ -127,7 +169,7 @@ export default class ViewTutorial extends React.Component {
                           </div>
                         </div>
                       </Box>
-                    </DialogActions>
+                    </DialogActions> */}
                   </DialogContent>
                   <DialogActions>
                     <TextField

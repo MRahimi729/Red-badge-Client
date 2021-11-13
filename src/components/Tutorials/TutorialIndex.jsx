@@ -24,7 +24,7 @@ export default class TutorialIndex extends React.Component {
       .then((response) => response.json())
       .then((getData) => {
         this.setState({ tutorials: getData });
-        // console.log(getData);
+        console.log(getData);
       });
   };
 
