@@ -15,6 +15,7 @@ import ClearOutlinedIcon from "@mui/icons-material/ClearOutlined";
 import CommentIcon from "@mui/icons-material/Comment";
 import TextField from "@mui/material/TextField";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import Modal from "@mui/material/Modal";
 import Post from "./Post.css";
 
 export default class ViewTutorial extends React.Component {
@@ -28,13 +29,32 @@ export default class ViewTutorial extends React.Component {
       maxWidth: "lg",
       comment: "",
       tutorialId: 0,
+      tutorial: "",
       comments: [],
     };
   }
+
+  fetchComments = () => {
+    fetch(`http://localhost:3000/comment/${this.props.tutorial.id}`, {
+      method: "GET",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: this.props.sessionToken,
+      }),
+    })
+      .then((response) => response.json())
+      .then((jsonData) => {
+        this.setState({
+          comments: jsonData,
+        });
+        // console.log(getData);
+      });
+  };
+
   handlePost = (event) => {
     console.log(this.props.sessionToken);
     event.preventDefault();
-    fetch(`http://localhost:3000/comment/create/${this.tutorial.id}`, {
+    fetch(`http://localhost:3000/comment/create/${this.props.tutorial.id}`, {
       method: "POST",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -49,6 +69,7 @@ export default class ViewTutorial extends React.Component {
       .then((response) => response.json())
       .then((data) => {
         this.setState({ data: data });
+        this.fetchComments();
       })
       .catch((error) => console.log(error));
   };
@@ -70,23 +91,6 @@ export default class ViewTutorial extends React.Component {
   // })
   //   );
   // };
-
-  fetchComments = () => {
-    fetch("http://localhost:3000/comment/${tutorial.id}", {
-      method: "GET",
-      headers: new Headers({
-        "Content-Type": "application/json",
-        Authorization: this.props.sessionToken,
-      }),
-    })
-      .then((response) => response.json())
-      .then((jsonData) => {
-        this.setState({
-          comments: jsonData,
-        });
-        // console.log(getData);
-      });
-  };
 
   render() {
     console.log(this.props.tutorial);
@@ -141,56 +145,34 @@ export default class ViewTutorial extends React.Component {
                     <Typography variant="h6">Directions</Typography>
                     <Typography>{this.props.tutorial.directions}</Typography>
                     <br />
-                    <Typography>Comments:</Typography>
+                    <Typography variant="h6">Comments:</Typography>
+                    <br />
                     <Typography>
                       {this.props.tutorial.comments.map((comment) => (
                         <p>{comment.comment}</p>
                       ))}
                     </Typography>
-                    {/* <DialogActions>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          flexDirection: "column",
-                          m: "auto",
-                          width: "fit-content",
-                        }}
-                      >
-                        <div className="post">
-                          <div className="post_top">
-                            <IconButton className="post_button">
-                              <MoreVertIcon />
-                            </IconButton>
-                            <div className="post_topInfo">
-                              <h3>username</h3>
-                              <p>Timestamp...</p>
-                              <Typography>Comments</Typography>
-                            </div>
-                          </div>
-                        </div>
-                      </Box>
-                    </DialogActions> */}
+                    <DialogActions>
+                      <TextField
+                        fullWidth
+                        value={this.state.comment}
+                        autoFocus
+                        margin="dense"
+                        // sx={{ m: 1, width: "60ch" }}
+                        onChange={(e) =>
+                          this.setState({ comment: e.target.value })
+                        }
+                        variant="outlined"
+                        id="comment"
+                        name="comment"
+                        label="Leave a comment"
+                        type="text"
+                        multiline
+                        rows={2}
+                      ></TextField>
+                      <Button onClick={this.handlePost}>Post</Button>
+                    </DialogActions>
                   </DialogContent>
-                  <DialogActions>
-                    <TextField
-                      fullWidth
-                      value={this.state.comment}
-                      autoFocus
-                      margin="dense"
-                      // sx={{ m: 1, width: "60ch" }}
-                      onChange={(e) =>
-                        this.setState({ comment: e.target.value })
-                      }
-                      variant="outlined"
-                      id="comment"
-                      name="comment"
-                      label="Leave a comment"
-                      type="text"
-                      multiline
-                      rows={2}
-                    ></TextField>
-                    <Button onClick={this.handlePost}>Post</Button>
-                  </DialogActions>
                 </Dialog>
               </Grid>
             </>

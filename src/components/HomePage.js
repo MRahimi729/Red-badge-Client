@@ -36,7 +36,7 @@ export default function Home(props) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AppBar position="relative">
+      <AppBar top="null">
         <Toolbar>
           <Button color="inherit">Home</Button>
           <Link to="/mytutorials"> My Stuff </Link>
