@@ -9,6 +9,7 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import EditTutorial from "./EditTutorial";
 import ViewTutorial from "./ViewTutorial";
+import APIURL from "../../helpers/environment";
 
 export default class TutorialTable extends React.Component {
   constructor(props) {
@@ -42,7 +43,7 @@ export default class TutorialTable extends React.Component {
   handleDelete = (tutorial) => {
     if (!window.confirm("Are you sure you want to delete this tutorial?"))
       return;
-    fetch(`http://localhost:3000/tutorial/delete/${tutorial.id}`, {
+    fetch(`${APIURL}/tutorial/delete/${tutorial.id}`, {
       method: "DELETE",
       headers: new Headers({
         "Content-Type": "application/json",

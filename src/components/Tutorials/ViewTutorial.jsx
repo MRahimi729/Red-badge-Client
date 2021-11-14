@@ -19,6 +19,7 @@ import Modal from "@mui/material/Modal";
 import Post from "./Post.css";
 import Card from "@mui/material/Card";
 import CommentActions from "../Comments/CommentActions";
+import APIURL from "../../helpers/environment";
 
 export default class ViewTutorial extends React.Component {
   constructor(props) {
@@ -47,7 +48,7 @@ export default class ViewTutorial extends React.Component {
   };
 
   fetchComments = () => {
-    fetch(`http://localhost:3000/comment/${this.props.tutorial.id}`, {
+    fetch(`${APIURL}/${this.props.tutorial.id}`, {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -66,7 +67,7 @@ export default class ViewTutorial extends React.Component {
   handlePost = (event) => {
     console.log(this.props.sessionToken);
     event.preventDefault();
-    fetch(`http://localhost:3000/comment/create/${this.props.tutorial.id}`, {
+    fetch(`${APIURL}/comment/create/${this.props.tutorial.id}`, {
       method: "POST",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -88,7 +89,7 @@ export default class ViewTutorial extends React.Component {
   // handleDelete = (comment) => {
   //   if (!window.confirm("Are you sure you want to delete this comment?"))
   //     return;
-  //   fetch(`http://localhost:3000/comment/delete/${comment.id}`, {
+  //   fetch(`{APIURL}/comment/delete/${comment.id}`, {
   //     method: "DELETE",
   //     headers: new Headers({
   //       "Content-Type": "application/json",

@@ -6,6 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContentText from "@mui/material/DialogContentText";
 import TextField from "@mui/material/TextField";
+import APIURL from "../../helpers/environment";
 
 export default class CommentActions extends React.Component {
   constructor(props) {
@@ -27,7 +28,7 @@ export default class CommentActions extends React.Component {
   handleEdit = (event) => {
     console.log(this.props.sessionToken);
     event.preventDefault();
-    fetch(`http://localhost:3000/comment/update/${this.state.id}`, {
+    fetch(`${APIURL}/comment/update/${this.state.id}`, {
       method: "PUT",
       headers: new Headers({
         "Content-Type": "application/json",

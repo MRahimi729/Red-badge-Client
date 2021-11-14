@@ -2,6 +2,7 @@ import React from "react";
 import TutorialForm from "./TutorialForm";
 import EditTutorial from "./EditTutorial";
 import TutorialTable from "./TutorialTable";
+import APIURL from "../../helpers/environment";
 
 export default class MyTutorialIndex extends React.Component {
   constructor(props) {
@@ -14,7 +15,7 @@ export default class MyTutorialIndex extends React.Component {
     this.userTutorials();
   }
   userTutorials = () => {
-    fetch("http://localhost:3000/tutorial/user", {
+    fetch(`${APIURL}/tutorial/user`, {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",

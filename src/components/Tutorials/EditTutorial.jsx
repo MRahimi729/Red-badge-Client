@@ -7,6 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Box from "@mui/material/Box";
+import APIURL from "../../helpers/environment";
 
 export default class EditTutorial extends React.Component {
   constructor(props) {
@@ -68,7 +69,7 @@ export default class EditTutorial extends React.Component {
   handleEdit = (event) => {
     console.log(this.props.sessionToken);
     event.preventDefault();
-    fetch(`http://localhost:3000/tutorial/update/${this.state.id}`, {
+    fetch(`${APIURL}/update/${this.state.id}`, {
       method: "PUT",
       headers: new Headers({
         "Content-Type": "application/json",

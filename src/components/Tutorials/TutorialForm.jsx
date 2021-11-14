@@ -7,6 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Box from "@mui/material/Box";
+import APIURL from "../../helpers/environment";
 
 export default class TutorialForm extends React.Component {
   constructor(props) {
@@ -56,7 +57,7 @@ export default class TutorialForm extends React.Component {
   handleSubmit = (event) => {
     console.log(this.props.sessionToken);
     event.preventDefault();
-    fetch("http://localhost:3000/tutorial/create", {
+    fetch(`${APIURL}/tutorial/create`, {
       method: "POST",
       headers: new Headers({
         "Content-Type": "application/json",
