@@ -18,6 +18,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Modal from "@mui/material/Modal";
 import Post from "./Post.css";
 import Card from "@mui/material/Card";
+import CommentActions from "../Comments/CommentActions";
 
 export default class ViewTutorial extends React.Component {
   constructor(props) {
@@ -32,8 +33,18 @@ export default class ViewTutorial extends React.Component {
       tutorialId: 0,
       tutorial: "",
       comments: [],
+      updateActive: false,
+      commentToUpdate: {},
     };
   }
+
+  handleOpen = () => {
+    this.setState({ updateActive: !this.state.updateActive });
+  };
+
+  handleUpdate = (comment) => {
+    this.setState({ commentToToUpdate: comment });
+  };
 
   fetchComments = () => {
     fetch(`http://localhost:3000/comment/${this.props.tutorial.id}`, {
@@ -74,7 +85,19 @@ export default class ViewTutorial extends React.Component {
       })
       .catch((error) => console.log(error));
   };
-
+  // handleDelete = (comment) => {
+  //   if (!window.confirm("Are you sure you want to delete this comment?"))
+  //     return;
+  //   fetch(`http://localhost:3000/comment/delete/${comment.id}`, {
+  //     method: "DELETE",
+  //     headers: new Headers({
+  //       "Content-Type": "application/json",
+  //       Authorization: this.props.sessionToken,
+  //     }),
+  //   })
+  //     .then((response) => response.json())
+  //     .then(() => this.setState({ status: "Comment Successfully Deleted" }));
+  // };
   render() {
     console.log(this.props.tutorial);
     return (
@@ -158,14 +181,18 @@ export default class ViewTutorial extends React.Component {
                   {this.props.tutorial.comments.map((comment) => (
                     <Container fixed>
                       <DialogContent>
-                        {/* <Container> */}
-                        {/* <Card> */}
                         {comment.comment}
 
-                        <Button>Edit</Button>
+                        <Button
+                          onClick={() => {
+                            this.handleOpen();
+                            this.handleUpdate(comment);
+                          }}
+                          size="small"
+                        >
+                          Edit
+                        </Button>
                         <Button>Delete</Button>
-                        {/* </Card> */}
-                        {/* </Container> */}
                       </DialogContent>
                     </Container>
                   ))}
@@ -174,6 +201,14 @@ export default class ViewTutorial extends React.Component {
             </>
           </Grid>
         </Container>
+        {this.state.updateActive && (
+          <CommentActions
+            open={this.state.updateActive}
+            commentToUpdate={this.state.commentToUpdate}
+            sessionToken={this.props.sessionToken}
+            handleOpen={this.handleOpen}
+          />
+        )}
       </div>
     );
   }
