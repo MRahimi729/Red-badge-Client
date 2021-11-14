@@ -18,32 +18,40 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import About from "./About";
 // import MyTutorials from "./Tutorials/MyTutorials";
-import TutorialIndex from "./Tutorials/TutorialIndex";
-import HeaderNav from "./HeaderNav";
-import Footer from "./Footer";
 
 const theme = createTheme();
 
-export default function Home(props) {
+export default function HeaderNav(props) {
+  const clearToken = () => {
+    localStorage.clear();
+  };
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <HeaderNav />
-      <main>
-        {/* Hero unit */}
-        <Box
-          sx={{
-            bgcolor: "background.paper",
-            pt: 8,
-            pb: 6,
-          }}
-        >
-          <TutorialIndex sessionToken={props.sessionToken} />
-        </Box>
-      </main>
-      {/* Footer */}
-      <Footer />
-      {/* End footer */}
+      <AppBar top="null">
+        <Toolbar>
+          <Button href="/" color="inherit">
+            Home
+          </Button>
+          <Button href="/mytutorials" color="inherit">
+            {" "}
+            My Tutorials{" "}
+          </Button>
+          <Button href="/about" color="inherit">
+            {" "}
+            About{" "}
+          </Button>
+          <Button
+            href="/"
+            onClick={() => {
+              clearToken();
+            }}
+            color="inherit"
+          >
+            Sign Out
+          </Button>
+        </Toolbar>
+      </AppBar>
     </ThemeProvider>
   );
 }

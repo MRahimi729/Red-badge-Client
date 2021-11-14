@@ -19,6 +19,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TutorialForm from "./TutorialForm";
 import MyTutorialIndex from "./MyTutorialIndex";
 import TutorialTable from "./TutorialTable";
+import HeaderNav from "../HeaderNav";
+import Footer from "../Footer";
 
 const theme = createTheme();
 
@@ -49,6 +51,7 @@ export default class MyTutorials extends React.Component {
       <div>
         <ThemeProvider theme={theme}>
           <CssBaseline />
+          <HeaderNav />
           <main>
             {/* Hero unit */}
             <Box
@@ -104,6 +107,7 @@ export default class MyTutorials extends React.Component {
               <MyTutorialIndex sessionToken={this.props.sessionToken} />
             </Container>
           </main>
+          <Footer />
         </ThemeProvider>
       </div>
     );

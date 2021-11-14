@@ -19,30 +19,38 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import About from "./About";
 // import MyTutorials from "./Tutorials/MyTutorials";
 import TutorialIndex from "./Tutorials/TutorialIndex";
-import HeaderNav from "./HeaderNav";
-import Footer from "./Footer";
+
+function Copyright() {
+  return (
+    <Typography variant="body2" color="text.secondary" align="center">
+      {"Copyright © "}
+      For the Coilture {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
 
 const theme = createTheme();
 
-export default function Home(props) {
+export default function Footer(props) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <HeaderNav />
-      <main>
-        {/* Hero unit */}
-        <Box
-          sx={{
-            bgcolor: "background.paper",
-            pt: 8,
-            pb: 6,
-          }}
-        >
-          <TutorialIndex sessionToken={props.sessionToken} />
-        </Box>
-      </main>
       {/* Footer */}
-      <Footer />
+      <Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">
+        <Typography variant="h6" align="center" gutterBottom>
+          Footer
+        </Typography>
+        <Typography
+          variant="subtitle1"
+          align="center"
+          color="text.secondary"
+          component="p"
+        >
+          Celebrating Our Culture, One Coil At A Time!
+        </Typography>
+        <Copyright />
+      </Box>
       {/* End footer */}
     </ThemeProvider>
   );

@@ -17,6 +17,7 @@ import TextField from "@mui/material/TextField";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Modal from "@mui/material/Modal";
 import Post from "./Post.css";
+import Card from "@mui/material/Card";
 
 export default class ViewTutorial extends React.Component {
   constructor(props) {
@@ -74,24 +75,6 @@ export default class ViewTutorial extends React.Component {
       .catch((error) => console.log(error));
   };
 
-  // fetchComments = () => {
-  //   fetch(
-  //     `http://localhost:3000/comment/${tutorial.id}`, {
-
-  //     }
-  // .then((response) => response.json())
-  // .then((jsonData) => {
-  //   console.log(jsonData);
-  //   if (jsonData) {
-  //     this.setState({
-  //       tutorialId: jsonData.id,
-  //       comments: jsonData.comment,
-  //     });
-  //   }
-  // })
-  //   );
-  // };
-
   render() {
     console.log(this.props.tutorial);
     return (
@@ -130,28 +113,27 @@ export default class ViewTutorial extends React.Component {
                       this.props.tutorial.createdAt
                     ).toLocaleDateString()}
                   </Typography>
-                  <DialogContent dividers>
-                    <Typography variant="h6">Description</Typography>
-                    <Typography>{this.props.tutorial.description}</Typography>
-                    <br />
-                    <Typography variant="h6">
-                      Estimated Time to Complete:
-                    </Typography>
-                    <Typography>{this.props.tutorial.estimatedTime}</Typography>
-                    <br />
-                    <Typography variant="h6">Tools</Typography>
-                    <Typography> {this.props.tutorial.tools}</Typography>
-                    <br />
-                    <Typography variant="h6">Directions</Typography>
-                    <Typography>{this.props.tutorial.directions}</Typography>
-                    <br />
-                    <Typography variant="h6">Comments:</Typography>
-                    <br />
-                    <Typography>
-                      {this.props.tutorial.comments.map((comment) => (
-                        <p>{comment.comment}</p>
-                      ))}
-                    </Typography>
+                  <Box>
+                    <DialogContent dividers>
+                      <Typography variant="h6">Description</Typography>
+                      <Typography>{this.props.tutorial.description}</Typography>
+                      <br />
+                      <Typography variant="h6">
+                        Estimated Time to Complete:
+                      </Typography>
+                      <Typography>
+                        {this.props.tutorial.estimatedTime}
+                      </Typography>
+                      <br />
+                      <Typography variant="h6">Tools</Typography>
+                      <Typography> {this.props.tutorial.tools}</Typography>
+                      <br />
+                      <Typography variant="h6">Directions</Typography>
+                      <Typography>{this.props.tutorial.directions}</Typography>
+                      <br />
+                      <Typography variant="h6">Comments:</Typography>
+                      <br />
+                    </DialogContent>
                     <DialogActions>
                       <TextField
                         fullWidth
@@ -172,7 +154,21 @@ export default class ViewTutorial extends React.Component {
                       ></TextField>
                       <Button onClick={this.handlePost}>Post</Button>
                     </DialogActions>
-                  </DialogContent>
+                  </Box>
+                  {this.props.tutorial.comments.map((comment) => (
+                    <Container fixed>
+                      <DialogContent>
+                        {/* <Container> */}
+                        {/* <Card> */}
+                        {comment.comment}
+
+                        <Button>Edit</Button>
+                        <Button>Delete</Button>
+                        {/* </Card> */}
+                        {/* </Container> */}
+                      </DialogContent>
+                    </Container>
+                  ))}
                 </Dialog>
               </Grid>
             </>
