@@ -100,19 +100,19 @@ export default class ViewTutorial extends React.Component {
   componentDidMount() {
     this.setState({ comments: this.props.tutorial.comments });
   }
-  // handleDelete = (comment) => {
-  //   if (!window.confirm("Are you sure you want to delete this comment?"))
-  //     return;
-  //   fetch(`{APIURL}/comment/delete/${comment.id}`, {
-  //     method: "DELETE",
-  //     headers: new Headers({
-  //       "Content-Type": "application/json",
-  //       Authorization: this.props.sessionToken,
-  //     }),
-  //   })
-  //     .then((response) => response.json())
-  //     .then(() => this.setState({ status: "Comment Successfully Deleted" }));
-  // };
+  handleDelete = (comment) => {
+    if (!window.confirm("Are you sure you want to delete this comment?"))
+      return;
+    fetch(`${APIURL}/comment/delete/${comment.id}`, {
+      method: "DELETE",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: this.props.sessionToken,
+      }),
+    })
+      .then((response) => response.json())
+      .then(() => this.setState({ status: "Comment Successfully Deleted" }));
+  };
   render() {
     console.log(this.props.tutorial);
     return (
@@ -207,7 +207,11 @@ export default class ViewTutorial extends React.Component {
                         >
                           Edit
                         </Button>
-                        <Button onClick={() => this.handleDelete(comment)}>
+                        <Button
+                          onClick={() => {
+                            this.handleDelete(comment);
+                          }}
+                        >
                           Delete
                         </Button>
                       </DialogContent>
