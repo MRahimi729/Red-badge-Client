@@ -24,18 +24,19 @@ export default class CommentActions extends React.Component {
       id: this.props.commentToUpdate.id,
       comment: this.props.commentToUpdate.comment,
     });
+    console.log(this.props);
   }
   handleEdit = (event) => {
     console.log(this.props.sessionToken);
     event.preventDefault();
-    fetch(`${APIURL}/comment/update/${this.state.id}`, {
+    fetch(`${APIURL}/comment/update/${this.props.commentToUpdate.id}`, {
       method: "PUT",
       headers: new Headers({
         "Content-Type": "application/json",
         Authorization: this.props.sessionToken,
       }),
       body: JSON.stringify({
-        tutorial: {
+        comment: {
           comment: this.state.comment,
         },
       }),

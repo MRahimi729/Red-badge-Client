@@ -48,7 +48,7 @@ export default class ViewTutorial extends React.Component {
   };
 
   handleUpdate = (comment) => {
-    this.setState({ commentToToUpdate: comment });
+    this.setState({ commentToUpdate: comment });
   };
 
   fetchComments = () => {
