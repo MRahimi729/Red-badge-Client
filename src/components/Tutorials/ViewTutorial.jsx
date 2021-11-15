@@ -39,6 +39,10 @@ export default class ViewTutorial extends React.Component {
     };
   }
 
+  addComment = (comment) => {
+    this.setState({ comments: [comment, ...this.state.comments] });
+  };
+
   handleOpen = () => {
     this.setState({ updateActive: !this.state.updateActive });
   };
@@ -48,7 +52,7 @@ export default class ViewTutorial extends React.Component {
   };
 
   fetchComments = () => {
-    fetch(`${APIURL}/${this.props.tutorial.id}`, {
+    fetch(`${APIURL}/comment/${this.props.tutorial.id}`, {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -80,12 +84,22 @@ export default class ViewTutorial extends React.Component {
       }),
     })
       .then((response) => response.json())
-      .then((data) => {
-        this.setState({ data: data });
-        this.fetchComments();
-      })
+      // .then((data) => {
+      //figure out where the new comment is coming from on the data object. Plug it into this.addComment
+      // this.addComment(data.comment)
+      // })
       .catch((error) => console.log(error));
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.tutorial !== this.props.tutorial) {
+      this.setState({ comments: this.props.tutorial.comments });
+    }
+  }
+
+  componentDidMount() {
+    this.setState({ comments: this.props.tutorial.comments });
+  }
   // handleDelete = (comment) => {
   //   if (!window.confirm("Are you sure you want to delete this comment?"))
   //     return;
@@ -179,7 +193,7 @@ export default class ViewTutorial extends React.Component {
                       <Button onClick={this.handlePost}>Post</Button>
                     </DialogActions>
                   </Box>
-                  {this.props.tutorial.comments.map((comment) => (
+                  {this.state.comments.map((comment) => (
                     <Container fixed>
                       <DialogContent>
                         {comment.comment}
@@ -193,7 +207,9 @@ export default class ViewTutorial extends React.Component {
                         >
                           Edit
                         </Button>
-                        <Button>Delete</Button>
+                        <Button onClick={() => this.handleDelete(comment)}>
+                          Delete
+                        </Button>
                       </DialogContent>
                     </Container>
                   ))}

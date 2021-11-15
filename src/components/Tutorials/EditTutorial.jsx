@@ -69,7 +69,7 @@ export default class EditTutorial extends React.Component {
   handleEdit = (event) => {
     console.log(this.props.sessionToken);
     event.preventDefault();
-    fetch(`${APIURL}/update/${this.state.id}`, {
+    fetch(`${APIURL}/tutorial/update/${this.state.id}`, {
       method: "PUT",
       headers: new Headers({
         "Content-Type": "application/json",
