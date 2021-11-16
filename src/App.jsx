@@ -73,7 +73,7 @@ export default class App extends React.Component {
   };
 
   userId = (userId) => {
-    localStorage.setItem("role", userId);
+    localStorage.setItem("userId", userId);
     this.setState({
       userId: userId,
     });

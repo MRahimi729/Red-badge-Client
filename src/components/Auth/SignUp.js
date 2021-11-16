@@ -68,8 +68,11 @@ class SignUp extends React.Component {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data.user.role);
         console.log(data);
         this.props.updateToken(data.sessionToken);
+        localStorage.setItem("role", data.user.role);
+        localStorage.setItem("userId", data.user.id);
       });
   };
 

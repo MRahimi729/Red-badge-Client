@@ -200,8 +200,9 @@ export default class ViewTutorial extends React.Component {
                     <Container fixed>
                       <DialogContent>
                         {comment.comment}
+                        {console.log(comment.userId)}
                         {/* {this.state.role ===localStorage.getItem(role: "admin") || ? () : <Button disabled>Edit</Button>} */}
-                        {localStorage.getItem("role") == "admin" ||
+                        {localStorage.getItem("role") === "Admin" ||
                         localStorage.getItem("userId") == comment.userId ? (
                           <Button
                             onClick={() => {
@@ -216,7 +217,7 @@ export default class ViewTutorial extends React.Component {
                           <Button disabled>Edit</Button>
                         )}
 
-                        {localStorage.getItem("role") == "admin" ||
+                        {localStorage.getItem("role") === "Admin" ||
                         localStorage.getItem("userId") == comment.userId ? (
                           <Button
                             onClick={() => {

@@ -108,23 +108,33 @@ export default class TutorialTable extends React.Component {
                           >
                             View
                           </Button>
-                          <Button
-                            onClick={() => {
-                              this.handleOpen();
-                              this.handleUpdate(tutorial);
-                            }}
-                            size="small"
-                          >
-                            Edit
-                          </Button>
-                          <Button
-                            onClick={() => {
-                              this.handleDelete(tutorial);
-                            }}
-                            size="small"
-                          >
-                            Delete
-                          </Button>
+                          {localStorage.getItem("role") === "Admin" ||
+                          localStorage.getItem("userId") == tutorial.userId ? (
+                            <Button
+                              onClick={() => {
+                                this.handleOpen();
+                                this.handleUpdate(tutorial);
+                              }}
+                              size="small"
+                            >
+                              Edit
+                            </Button>
+                          ) : (
+                            <Button disabled>Edit</Button>
+                          )}
+                          {localStorage.getItem("role") === "Admin" ||
+                          localStorage.getItem("userId") == tutorial.userId ? (
+                            <Button
+                              onClick={() => {
+                                this.handleDelete(tutorial);
+                              }}
+                              size="small"
+                            >
+                              Delete
+                            </Button>
+                          ) : (
+                            <Button disabled>Delete</Button>
+                          )}
                         </CardActions>
                       </Card>
                     </Grid>
