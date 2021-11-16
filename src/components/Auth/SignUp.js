@@ -14,15 +14,11 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import APIURL from "../../helpers/environment";
+import BackgroundImage from "../../assets/BackgroundImage.jpg";
 
 function Copyright(props) {
   return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
+    <Typography variant="body2" color="#fff0e8" align="center" {...props}>
       {"Copyright © "}
       {new Date().getFullYear()} For the Coilture
       {"."}
@@ -78,97 +74,109 @@ class SignUp extends React.Component {
 
   render() {
     return (
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign up
-          </Typography>
+      <Container
+        component="main"
+        maxWidth="xl"
+        sx={{
+          backgroundImage: `url(${BackgroundImage})`,
+          backgroundSize: "cover",
+          minHeight: 900,
+          backgroundPosition: "60% 50%",
+        }}
+      >
+        <Container component="main" maxWidth="lg">
+          <CssBaseline />
           <Box
-            component="form"
-            noValidate
-            //   onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
+            sx={{
+              marginTop: 0,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              bgcolor: "white",
+            }}
           >
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                  value={this.state.firstName}
-                  onChange={this.handleFirstName}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                  value={this.state.lastName}
-                  onChange={this.handleLastName}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                  value={this.state.email}
-                  onChange={this.handleEmail}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                  value={this.state.password}
-                  onChange={this.handlePassword}
-                />
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              onClick={this.handleSubmit}
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign up
+            </Typography>
+            <Box
+              component="form"
+              noValidate
+              //   onSubmit={handleSubmit}
+              sx={{ mt: 3 }}
             >
-              Sign Up
-            </Button>
-            <Grid container justifyContent="center">
-              <Grid item>
-                <Link to="/">Already have an account? Sign in</Link>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    autoComplete="given-name"
+                    name="firstName"
+                    required
+                    fullWidth
+                    id="firstName"
+                    label="First Name"
+                    autoFocus
+                    value={this.state.firstName}
+                    onChange={this.handleFirstName}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="lastName"
+                    label="Last Name"
+                    name="lastName"
+                    autoComplete="family-name"
+                    value={this.state.lastName}
+                    onChange={this.handleLastName}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    autoComplete="email"
+                    value={this.state.email}
+                    onChange={this.handleEmail}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="new-password"
+                    value={this.state.password}
+                    onChange={this.handlePassword}
+                  />
+                </Grid>
               </Grid>
-            </Grid>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={this.handleSubmit}
+              >
+                Sign Up
+              </Button>
+              <Grid container justifyContent="center">
+                <Grid item>
+                  <Link to="/">Already have an account? Sign in</Link>
+                </Grid>
+              </Grid>
+            </Box>
           </Box>
-        </Box>
-        <Copyright sx={{ mt: 5 }} />
+          <Copyright sx={{ mt: 20 }} />
+        </Container>
       </Container>
     );
   }

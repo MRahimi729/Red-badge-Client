@@ -70,6 +70,7 @@ class SignIn extends React.Component {
     return (
       <Container
         component="main"
+        maxWidth="xl"
         sx={{
           backgroundImage: `url(${BackgroundImage})`,
           backgroundSize: "cover",
@@ -77,11 +78,11 @@ class SignIn extends React.Component {
           backgroundPosition: "60% 50%",
         }}
       >
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="lg">
           <CssBaseline />
           <Box
             sx={{
-              marginTop: 8,
+              marginTop: 0,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
