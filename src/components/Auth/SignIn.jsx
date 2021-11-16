@@ -59,6 +59,8 @@ class SignIn extends React.Component {
       .then((data) => {
         console.log(data.role);
         this.props.updateToken(data.sessionToken);
+        localStorage.setItem("role", data.user.role);
+        localStorage.setItem("userId", data.user.id);
       });
   };
 

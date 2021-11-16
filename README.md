@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# Red Badge Final Project - For The Coilture App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This PERN project is an online community app celebrating the beauty, resilience, and diversity of natural hair in the African Diaspora. Here members can browse different hair pictures, view hair tutorials, and create their own hair tutorials for others. This app is designed for people who are in love or who are falling in love with their natural hair, whose expertise levels range from beginner to advanced. This will be a community space for all enthusiasts of the natural hair movement.
+
+On the client side, users will be able to browse through and create hair tutorials. Users can also leave comments on the tutorials. User roles are implemented so that users can only edit/delete their own tutorials.
 
 ## Available Scripts
 
