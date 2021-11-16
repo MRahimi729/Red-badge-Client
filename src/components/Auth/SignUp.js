@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import APIURL from "../../helpers/environment";
 import BackgroundImage from "../../assets/BackgroundImage.jpg";
+import Logo from "../../assets/Logo.png";
 
 function Copyright(props) {
   return (
@@ -92,12 +93,21 @@ class SignUp extends React.Component {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              bgcolor: "white",
+              bgcolor: "rgba(255, 255, 255, 0.5)",
+              backgroundImage:
+                "linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0))",
+              backdropFilter: "blur(3px)",
+              boxShadow: "10px 10px 10px rgba(30, 30, 30, 0.1)",
+              borderRadius: 5,
+              borderLeft: "solid 1px rgba(255, 255, 255, 0.3)",
+              borderTop: "solid 1px rgba(255, 255, 255, 0.8)",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <LockOutlinedIcon />
-            </Avatar>
+            <Avatar
+              alt="Logo"
+              src={Logo}
+              sx={{ m: 1, width: 40, height: 40 }}
+            ></Avatar>
             <Typography component="h1" variant="h5">
               Sign up
             </Typography>

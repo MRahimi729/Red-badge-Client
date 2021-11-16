@@ -139,6 +139,8 @@ export default class ViewTutorial extends React.Component {
                   <Box
                     sx={{
                       display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
                       flexDirection: "column",
                       m: "auto",
                       width: "fit-content",
