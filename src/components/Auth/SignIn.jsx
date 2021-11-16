@@ -68,11 +68,13 @@ class SignIn extends React.Component {
 
   render() {
     return (
-      <Box
+      <Container
         component="main"
         sx={{
           backgroundImage: `url(${BackgroundImage})`,
           backgroundSize: "cover",
+          minHeight: 900,
+          backgroundPosition: "60% 50%",
         }}
       >
         <Container component="main" maxWidth="xs">
@@ -83,6 +85,7 @@ class SignIn extends React.Component {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+              bgcolor: "white",
             }}
           >
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
@@ -144,7 +147,7 @@ class SignIn extends React.Component {
           </Box>
           <Copyright sx={{ mt: 8, mb: 4 }} />
         </Container>
-      </Box>
+      </Container>
     );
   }
 }
