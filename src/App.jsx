@@ -12,11 +12,11 @@ import MyTutorials from "./components/Tutorials/MyTutorials";
 import SignIn from "./components/Auth/SignIn";
 import SignUp from "./components/Auth/SignUp";
 import TutorialIndex from "./components/Tutorials/TutorialIndex";
-import { createMuiTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import "./App.css";
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     primary: {
       main: "#fff0e8",
@@ -47,7 +47,8 @@ export default class App extends React.Component {
     super();
     this.state = {
       sessionToken: "",
-      // userRole: "",
+      userRole: "",
+      userId: "",
     };
   }
 
@@ -64,12 +65,32 @@ export default class App extends React.Component {
     });
   };
 
+  userRole = (userRole) => {
+    localStorage.setItem("role", userRole);
+    this.setState({
+      userRole: userRole,
+    });
+  };
+
+  userId = (userId) => {
+    localStorage.setItem("role", userId);
+    this.setState({
+      userId: userId,
+    });
+  };
+
   render() {
     return (
       // (<SignUp updateToken={updateToken} />),
       // (<SignIn updateToken={updateToken} />)
       <ThemeProvider theme={theme}>
-        <div backgroundcolor="#fff0e8">
+        <div
+          style={{
+            backgroundColor: "#442c2e",
+            width: "100%",
+            height: "100%",
+          }}
+        >
           <Container
             maxWidth="md"
             justifyContent="center"

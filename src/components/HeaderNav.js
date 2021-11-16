@@ -28,7 +28,7 @@ export default function HeaderNav(props) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AppBar top="null">
+      <AppBar top="null" style={{ backgroundColor: "#705557" }}>
         <Toolbar>
           <Button href="/" color="inherit">
             Home

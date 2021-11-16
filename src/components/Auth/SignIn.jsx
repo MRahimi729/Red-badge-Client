@@ -14,7 +14,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import APIURL from "../../helpers/environment";
-// import { BackgroundImage } from "./assets/BackgroundImage.jpg";
+import BackgroundImage from "../../assets/BackgroundImage.jpg";
 
 function Copyright(props) {
   return (
@@ -69,11 +69,11 @@ class SignIn extends React.Component {
   render() {
     return (
       <Box
-      // component="main"
-      // sx={{
-      //   backgroundImage: `url(${BackgroundImage})`,
-      //   backgroundSize: "cover",
-      // }}
+        component="main"
+        sx={{
+          backgroundImage: `url(${BackgroundImage})`,
+          backgroundSize: "cover",
+        }}
       >
         <Container component="main" maxWidth="xs">
           <CssBaseline />

@@ -19,6 +19,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import About from "./About";
 // import MyTutorials from "./Tutorials/MyTutorials";
 import TutorialIndex from "./Tutorials/TutorialIndex";
+import { withStyles } from "@mui/material/styles";
 
 function Copyright() {
   return (
@@ -37,10 +38,8 @@ export default function Footer(props) {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       {/* Footer */}
-      <Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">
-        <Typography variant="h6" align="center" gutterBottom>
-          Footer
-        </Typography>
+      <Box sx={{ bgcolor: "705557", p: 0 }} component="footer">
+        <Copyright />
         <Typography
           variant="subtitle1"
           align="center"
@@ -49,7 +48,6 @@ export default function Footer(props) {
         >
           Celebrating Our Culture, One Coil At A Time!
         </Typography>
-        <Copyright />
       </Box>
       {/* End footer */}
     </ThemeProvider>

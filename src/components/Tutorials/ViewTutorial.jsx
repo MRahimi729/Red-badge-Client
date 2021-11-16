@@ -36,6 +36,7 @@ export default class ViewTutorial extends React.Component {
       comments: [],
       updateActive: false,
       commentToUpdate: {},
+      role: "",
     };
   }
 
@@ -64,6 +65,7 @@ export default class ViewTutorial extends React.Component {
         this.setState({
           comments: jsonData,
         });
+
         // console.log(getData);
       });
   };
@@ -84,10 +86,11 @@ export default class ViewTutorial extends React.Component {
       }),
     })
       .then((response) => response.json())
-      // .then((data) => {
-      //figure out where the new comment is coming from on the data object. Plug it into this.addComment
-      // this.addComment(data.comment)
-      // })
+      .then((data) => {
+        //figure out where the new comment is coming from on the data object. Plug it into this.addComment
+        // this.addComment(data.comment)
+        window.location.reload();
+      })
       .catch((error) => console.log(error));
   };
 
@@ -197,23 +200,34 @@ export default class ViewTutorial extends React.Component {
                     <Container fixed>
                       <DialogContent>
                         {comment.comment}
+                        {/* {this.state.role ===localStorage.getItem(role: "admin") || ? () : <Button disabled>Edit</Button>} */}
+                        {localStorage.getItem("role") == "admin" ||
+                        localStorage.getItem("userId") == comment.userId ? (
+                          <Button
+                            onClick={() => {
+                              this.handleOpen();
+                              this.handleUpdate(comment);
+                            }}
+                            size="small"
+                          >
+                            Edit
+                          </Button>
+                        ) : (
+                          <Button disabled>Edit</Button>
+                        )}
 
-                        <Button
-                          onClick={() => {
-                            this.handleOpen();
-                            this.handleUpdate(comment);
-                          }}
-                          size="small"
-                        >
-                          Edit
-                        </Button>
-                        <Button
-                          onClick={() => {
-                            this.handleDelete(comment);
-                          }}
-                        >
-                          Delete
-                        </Button>
+                        {localStorage.getItem("role") == "admin" ||
+                        localStorage.getItem("userId") == comment.userId ? (
+                          <Button
+                            onClick={() => {
+                              this.handleDelete(comment);
+                            }}
+                          >
+                            Delete
+                          </Button>
+                        ) : (
+                          <Button disabled>Delete</Button>
+                        )}
                       </DialogContent>
                     </Container>
                   ))}

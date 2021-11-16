@@ -57,7 +57,7 @@ export default class TutorialTable extends React.Component {
     console.log(this.props.tutorials);
     return (
       <div>
-        <Container sx={{ py: 8 }} maxWidth="md">
+        <Container sx={{ py: 8, bgcolor: "#fff0e8" }} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
             {this.props.tutorials.length > 0 ? (
