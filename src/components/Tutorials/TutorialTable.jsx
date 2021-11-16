@@ -108,8 +108,7 @@ export default class TutorialTable extends React.Component {
                           >
                             View
                           </Button>
-                          {localStorage.getItem("role") === "Admin" ||
-                          localStorage.getItem("userId") == tutorial.userId ? (
+                          {localStorage.getItem("userId") == tutorial.userId ? (
                             <Button
                               onClick={() => {
                                 this.handleOpen();

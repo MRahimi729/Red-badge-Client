@@ -95,7 +95,7 @@ class SignIn extends React.Component {
             <Avatar
               alt="Logo"
               src={Logo}
-              sx={{ m: 1, width: 40, height: 40 }}
+              sx={{ m: 1, width: 75, height: 75 }}
             ></Avatar>
             <Typography component="h1" variant="h5">
               Sign in

@@ -204,8 +204,7 @@ export default class ViewTutorial extends React.Component {
                         {comment.comment}
                         {console.log(comment.userId)}
                         {/* {this.state.role ===localStorage.getItem(role: "admin") || ? () : <Button disabled>Edit</Button>} */}
-                        {localStorage.getItem("role") === "Admin" ||
-                        localStorage.getItem("userId") == comment.userId ? (
+                        {localStorage.getItem("userId") == comment.userId ? (
                           <Button
                             onClick={() => {
                               this.handleOpen();
